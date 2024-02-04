@@ -1,4 +1,5 @@
 import patito from './assets/images/patito.png';
+import ReduxExamplesPage from './pages/ReduxExamplesPage/ReduxExamplesPage';
 const App = () => {
   return (
     <>
@@ -7,6 +8,7 @@ const App = () => {
           <div className="col">
             <h1>TITULO 1</h1>
             <img src={patito} alt="patito" width={'400px'} />
+            <ReduxExamplesPage />
           </div>
         </div>
       </div>
