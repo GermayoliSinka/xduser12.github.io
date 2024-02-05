@@ -1,8 +1,59 @@
-# React + Vite
+# Eressea Solutions React Vite Boilerplate
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Estamos utilizando Vite + React para este proyecto. El proyecto tiene Bootstrap 5.3.2 instalado.
 
-Currently, two official plugins are available:
+## Instalar
+Para instalar los paquetes debemos correr:
+```bash
+npm install
+```
+## Configuración de ENV
+Debemos crear archivo de variables de entorno `.env` en la raíz del proyecto.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+```bash
+VITE_APP_DOMAIN=XXXXXXXXXXXXXX
+```
+
+## Correr
+```bash
+npm run dev
+```
+
+## Compilar
+Los builds se compilan en la carpeta `dist`.
+```bash
+npm run build
+```
+
+## Archivos
+```text
+src/
+├── App.jsx
+├── main.jsx
+├── assets/
+│   └── scss/
+│       ├── stylesheet.scss
+│       └── styles/
+│           ├── style.scss
+│           ├── typography.scss
+│           └── variables.scss
+├── components/
+│   └── NavBar/
+│       ├── NavBar.jsx
+│       └── NavBarOptions.jsx
+├── config/
+│   └── site.config.js
+├── components/
+│   └── NavBar/
+│       ├── NavBar.jsx
+│       └── NavBarOptions.jsx
+├── pages/
+│   ├── Admin/
+│   │   └── LoginPage
+│   │       └── LoginPage.jsx
+│   ├── HomePage/
+│   │   └── HomePage.jsx
+│   └── ReduxExamplesPage/
+│       └── ReduxExamplesPage.jsx
+├── redux/
+└── services/
