@@ -8,7 +8,10 @@ import LoginPage from './pages/Admin/LoginPage/LoginPage';
 import ReduxExamplesPage from './pages/ReduxExamplesPage/ReduxExamplesPage.jsx';
 
 const App = () => {
-  let navBarMainOptions = [{ option: 'Home', to: '/' }];
+  let navBarMainOptions = [
+    { option: 'Home', to: '/' },
+    { option: 'Redux Example Page', to: '/redux-example-page' },
+  ];
   let navBarRightOptions = [
     { option: 'My Profile', to: '/my-profile', displayIfLoggedIn: true },
     { option: 'Login', to: '/login', displayIfLoggedIn: false },

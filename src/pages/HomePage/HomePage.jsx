@@ -1,5 +1,4 @@
 import patito from '../../assets/images/patito.png';
-import ReduxExamplesPage from '../ReduxExamplesPage/ReduxExamplesPage.jsx';
 
 export default function HomePage() {
   return (
@@ -8,7 +7,6 @@ export default function HomePage() {
         <div className="col">
           <h1>TITULO 1</h1>
           <img src={patito} alt="patito" width={'400px'} />
-          <ReduxExamplesPage />
         </div>
       </div>
     </div>
