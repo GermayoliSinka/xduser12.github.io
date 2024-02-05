@@ -10,8 +10,12 @@ export default function ReduxExamplesPage() {
     <div className="container">
       <h1>Redux Examples Page</h1>
       <h2>Count: {count}</h2>
-      <button onClick={handleClickAddBy1}>Add 1</button>
-      <button onClick={handleClickAddBy5}>Add 5</button>
+      <button className="btn btn-primary" onClick={handleClickAddBy1}>
+        Add 1
+      </button>
+      <button className="btn btn-primary mx-3" onClick={handleClickAddBy5}>
+        Add 5
+      </button>
     </div>
   );
 }
