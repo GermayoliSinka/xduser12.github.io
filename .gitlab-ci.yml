@@ -1,5 +1,18 @@
 stages:
+  - test
   - build
+
+test:
+    stage: test
+    image: node:21.5-alpine3.19
+    before_script:
+        - npm install
+    script:
+        - npm run test
+    tags:
+        - docker
+    rules:
+        - if: $CI_COMMIT_BRANCH == "production"
 
 build:
   stage: build
