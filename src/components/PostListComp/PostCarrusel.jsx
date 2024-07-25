@@ -68,7 +68,7 @@ const PostCarousel = ({ searchTerm, onSearchChange, onSearchSubmit }) => {
 
     const titleStyle = {
         color: 'white',
-        fontSize: '2.5rem',
+        fontSize: '1.0rem',
         marginBottom: '1rem',
         textAlign: 'center',
     };
@@ -86,7 +86,7 @@ const PostCarousel = ({ searchTerm, onSearchChange, onSearchSubmit }) => {
             </div>
             <div style={overlayStyle}>
                 <h1 style={titleStyle}>Bienvenido a la pagina</h1>
-                <h5>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Quis hic praesentium libero soluta ullam. Ea eum alias qui quidem sed, excepturi officiis est, dicta asperiores et, doloremque quo quis deleniti.</h5>
+                <h5 style={titleStyle}>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Quis hic praesentium libero soluta ullam. Ea eum alias qui quidem sed, excepturi officiis est, dicta asperiores et, doloremque quo quis deleniti.</h5>
                 <div style={searchContainerStyle}>
                     <form onSubmit={onSearchSubmit} className="d-flex justify-content-center align-items-center">
                         <input 
