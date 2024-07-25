@@ -177,7 +177,7 @@ const PostList = ({ postsPerPage }) => {
                 <Modal.Header closeButton>
                     <Modal.Title>No se encontraron resultados</Modal.Title>
                 </Modal.Header>
-                <Modal.Body>No hay publicaciones que coincidan con su búsqueda.</Modal.Body>
+                <Modal.Body>No hay publicaciones :/ </Modal.Body>
                 <Modal.Footer>
                     <Button variant="secondary" onClick={handleCloseModal}>
                         Cerrar
