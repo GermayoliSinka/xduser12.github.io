@@ -1,0 +1,39 @@
+.custom-navbar {
+    background-color: #001f3f; /* Azul marino */
+    padding: 1rem 2rem;
+}
+
+.custom-brand {
+    font-size: 2rem;
+    font-weight: bold;
+    text-transform: uppercase; /* Convertir a mayúsculas */
+    margin-left: 2rem; /* Espacio adicional a la izquierda */
+}
+
+.custom-brand span {
+    display: inline-block;
+    transition: transform 0.3s ease;
+}
+
+.custom-brand span:hover {
+    transform: scale(1.2);
+}
+
+.letter { color: hsl(0, 100%, 71%); font-size: 1.5rem; }
+
+.social-icons {
+    margin-left: auto;
+    margin-right: 2px; 
+    margin-top: 5px;
+}
+
+.social-icons a {
+    color: white;
+    font-size: 1.5rem;
+    margin: 0 0.75rem; 
+    transition: color 0.3s ease;
+}
+
+.social-icons a:hover {
+    color: #feca57;
+}

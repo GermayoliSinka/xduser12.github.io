@@ -1,0 +1,60 @@
+/* PostCard.css */
+
+.card {
+    position: relative;
+    overflow: hidden; /* Evita el desbordamiento de contenido */
+    border: none; /* Elimina el borde predeterminado */
+    margin-bottom: 1.5rem; /* Espacio entre tarjetas en la fila */
+}
+
+.card-img-container {
+    position: relative;
+    width: 100%; /* Asegura que el contenedor ocupe el 100% del ancho */
+}
+
+.card-img-top {
+    width: 100%;
+    height: auto;
+    display: block;
+    object-fit: cover; /* Asegura que la imagen cubra el área sin deformarse */
+}
+
+.card-img-overlay {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: rgba(255, 255, 255, 0.8); /* Fondo blanco con opacidad de 0.8 */
+    color: #333; /* Color del texto en gris oscuro para contraste */
+    padding: 1rem;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end; /* Alinea el contenido al final del contenedor */
+    height: 30%; /* Ajusta la altura del overlay según tus necesidades */
+    border-top: 1px solid rgba(0, 0, 0, 0.1); /* Línea delgada arriba del overlay para separación visual */
+    box-shadow: inset 0 -4px 6px rgba(0, 0, 0, 0.1); /* Sombra interna para dar un efecto de profundidad */
+    z-index: 1; /* Asegura que el overlay esté encima de la imagen */
+}
+
+.card-title {
+    margin: 0;
+    font-size: 1.25rem; /* Tamaño del texto del título */
+    font-weight: bold; /* Negrita para mayor visibilidad */
+    line-height: 1.2; /* Espaciado entre líneas */
+}
+
+.card-description {
+    margin: 0.5rem 0 0;
+    font-size: 1rem; /* Tamaño del texto de la descripción */
+    line-height: 1.4; /* Espaciado entre líneas */
+    overflow: hidden; /* Oculta el texto que se desborda */
+    text-overflow: ellipsis; /* Agrega puntos suspensivos al final del texto */
+}
+
+/* Responsive Styles */
+@media (max-width: 768px) {
+    .card {
+        margin-bottom: 1rem; /* Espacio reducido entre tarjetas en pantallas pequeñas */
+    }
+}

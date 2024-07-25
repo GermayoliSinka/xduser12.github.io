@@ -1,10 +1,10 @@
 import { useParams } from 'react-router-dom';
 import { useState, useEffect } from 'react';
+import CommentList from './CommentList'; // Asegúrate de importar el componente CommentList
 
 const PostDetails = () => {
     const { postId } = useParams();
     const [post, setPost] = useState(null);
-    const [comments, setComments] = useState([]);
     const [photo, setPhoto] = useState(null);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
@@ -18,11 +18,6 @@ const PostDetails = () => {
                 const postResponse = await fetch(`https://jsonplaceholder.typicode.com/posts/${postId}`);
                 const postData = await postResponse.json();
                 setPost(postData);
-
-                // Fetch comments for the post
-                const commentsResponse = await fetch(`https://jsonplaceholder.typicode.com/posts/${postId}/comments`);
-                const commentsData = await commentsResponse.json();
-                setComments(commentsData);
 
                 // Fija una imagen si no se encuentra ninguna
                 const defaultPhoto = {
@@ -45,26 +40,33 @@ const PostDetails = () => {
     if (error) return <p>Error: {error.message}</p>;
 
     return (
-        <div className="container">
-            {post && (
-                <>
-                    <h1>{post.title}</h1>
-                    <p>{post.body}</p>
-                    {photo && (
-                        <img src={photo.url} alt={photo.title} className="img-fluid" />
+        <div className="container-fluid d-flex flex-column vh-100 m-5">
+            <div className="row flex-grow-1">
+                <div className="col-md-6 d-flex flex-column p-5 ">
+                    {post && (
+                        <>
+                            <h1>{post.title}</h1>
+                            <p>{post.body}</p>
+                            {photo && (
+                                <img 
+                                    src={photo.url} 
+                                    alt={photo.title} 
+                                    className="img-fluid" 
+                                    style={{ maxHeight: '50vh', objectFit: 'contain' }} 
+                                />
+                            )}
+                        </>
                     )}
-                    <h2>Comments</h2>
-                    <ul>
-                        {comments.map(comment => (
-                            <li key={comment.id}>
-                                <h5>{comment.name}</h5>
-                                <p>{comment.body}</p>
-                                <small>{comment.email}</small>
-                            </li>
-                        ))}
-                    </ul>
-                </>
-            )}
+                </div>
+                <div className="col-md-6 d-flex flex-column p-5">
+                    <div className="border rounded p-3 d-flex flex-column" style={{ height: '100%', overflow: 'hidden' }}>
+                        <h2>Comments</h2>
+                        <div className="comments-container" style={{ flexGrow: 1, overflowY: 'auto' }}>
+                            <CommentList postId={postId} />
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     );
 };

@@ -1,48 +1,27 @@
-import NavBarOption from './NavBarOption.jsx';
-import PropTypes from 'prop-types';
-const NavBar = ({ main, right }) => {
-  return (
-    <nav className="navbar navbar-expand-lg bg-light">
-      <div className="container ">
-        <span className="navbar-brand">Navbar</span>
-        <button
-          className="navbar-toggler"
-          type="button"
-          data-bs-toggle="collapse"
-          data-bs-target="#navbarNav"
-        >
-          <span className="navbar-toggler-icon"></span>
-        </button>
-        <div className="collapse navbar-collapse" id="navbarNav">
-          <ul className="navbar-nav me-auto d-flex flex-wrap">
-            {main.map((_navBarOption, index) => (
-              <NavBarOption
-                key={index}
-                option={_navBarOption.option}
-                to={_navBarOption.to}
-                displayIfLoggedIn={_navBarOption.displayIfLoggedIn}
-                jsx={_navBarOption.jsx}
-              />
-            ))}
-          </ul>
-          <ul className="navbar-nav">
-            {right.map((_navBarOption, index) => (
-              <NavBarOption
-                key={index}
-                option={_navBarOption.option}
-                to={_navBarOption.to}
-                displayIfLoggedIn={_navBarOption.displayIfLoggedIn}
-                jsx={_navBarOption.jsx}
-              />
-            ))}
-          </ul>
-        </div>
-      </div>
-    </nav>
-  );
+import { Link } from 'react-router-dom';
+import './../../assets/scss/stylePages/navar.css'; // Asegúrate de crear este archivo CSS
+
+const Navbar = () => {
+    return (
+        <nav className="navbar navbar-expand-lg navbar-dark custom-navbar">
+            <div className="container-fluid">
+                <Link className="navbar-brand custom-brand" to="#">
+                    <span className="letter">PUBLICIDAD - PRUEBA</span>
+                </Link>
+                <div className="social-icons">
+                    <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" className="mx-2">
+                        <i className="bi bi-facebook"></i>
+                    </a>
+                    <a href="https://twitter.com" target="_blank" rel="noopener noreferrer" className="mx-2">
+                        <i className="bi bi-twitter"></i>
+                    </a>
+                    <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" className="mx-2">
+                        <i className="bi bi-instagram"></i>
+                    </a>
+                </div>
+            </div>
+        </nav>
+    );
 };
-NavBar.propTypes = {
-  main: PropTypes.array.isRequired,
-  right: PropTypes.array.isRequired,
-};
-export default NavBar;
+
+export default Navbar;
