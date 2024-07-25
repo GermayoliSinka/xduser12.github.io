@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import PostDetails from './components/PostListComp/PostDetail.jsx';
 import PostList from './pages/PostList/PostList.jsx';
 import Navbar from './components/NavBar/NavBar.jsx';
+import Footer from './components/FooterPage/FooterPage.jsx';
 
 const App = () => {
 
@@ -12,9 +13,8 @@ const App = () => {
         <Routes>
             <Route path="/" element={<PostList postsPerPage={10} />} />
             <Route path="/post/:postId" element={<PostDetails />} />
-            
-
         </Routes>
+        <Footer/>
     </Router>
   );
 };

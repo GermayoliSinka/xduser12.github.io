@@ -3,52 +3,55 @@ import PropTypes from 'prop-types';
 import { useNavigate } from 'react-router-dom';
 import Pagination from './../../components/PostListComp/Pagination';
 import './../../assets/scss/stylePages/PostList.css';
-import PostCarrusel from '../../components/PostListComp/PostCarrusel';
+import UserFilter from './../../components/PostListComp/UserFilter';
+import PostCarousel from '../../components/PostListComp/PostCarrusel';
 
 const PostList = ({ postsPerPage }) => {
     const [posts, setPosts] = useState([]);
     const [photos, setPhotos] = useState([]);
     const [users, setUsers] = useState([]);
+    const [comments, setComments] = useState([]);
     const [currentPage, setCurrentPage] = useState(1);
     const [searchTerm, setSearchTerm] = useState('');
     const [selectedUser, setSelectedUser] = useState('');
     const [highlightedTerm, setHighlightedTerm] = useState('');
-    const [loading, setLoading] = useState(true);
-    const [error, setError] = useState(null);
+    const [userPage, setUserPage] = useState(1);
+    const usersPerPage = 5; 
     const navigate = useNavigate();
 
     useEffect(() => {
         const fetchData = async () => {
             try {
-                setLoading(true);
-                const [postsResponse, photosResponse, usersResponse] = await Promise.all([
+                const [postsResponse, photosResponse, usersResponse, commentsResponse] = await Promise.all([
                     fetch('https://jsonplaceholder.typicode.com/posts'),
                     fetch('https://jsonplaceholder.typicode.com/photos'),
-                    fetch('https://jsonplaceholder.typicode.com/users')
+                    fetch('https://jsonplaceholder.typicode.com/users'),
+                    fetch('https://jsonplaceholder.typicode.com/comments')
                 ]);
-                const [postsData, photosData, usersData] = await Promise.all([
+                const [postsData, photosData, usersData, commentsData] = await Promise.all([
                     postsResponse.json(),
                     photosResponse.json(),
-                    usersResponse.json()
+                    usersResponse.json(),
+                    commentsResponse.json()
                 ]);
                 setPosts(postsData);
                 setPhotos(photosData);
                 setUsers(usersData);
+                setComments(commentsData);
             } catch (error) {
-                setError(error);
-            } finally {
-                setLoading(false);
-            }
+                console.log(error);
+            } 
         };
 
         fetchData();
     }, []);
 
-    if (loading) return <p>Loading...</p>;
-    if (error) return <p>Error: {error.message}</p>;
-
     const getPhotoForPost = (postId) => {
         return photos.find(photo => photo.albumId === postId);
+    };
+
+    const getCommentCountForPost = (postId) => {
+        return comments.filter(comment => comment.postId === postId).length;
     };
 
     const highlightText = (text, term) => {
@@ -82,8 +85,8 @@ const PostList = ({ postsPerPage }) => {
         setSearchTerm(event.target.value);
     };
 
-    const handleUserChange = (event) => {
-        setSelectedUser(event.target.value);
+    const handleUserChange = (userId) => {
+        setSelectedUser(userId);
         setCurrentPage(1);
     };
 
@@ -98,61 +101,67 @@ const PostList = ({ postsPerPage }) => {
         navigate(`/post/${postId}`);
     };
 
+    /*filtrado user */
+    const handleUserPageChange = (direction) => {
+        if (direction === 'prev' && userPage > 1) {
+            setUserPage(userPage - 1);
+        } else if (direction === 'next' && (userPage * usersPerPage) < users.length) {
+            setUserPage(userPage + 1);
+        }
+    };
+
     return (
-        <div className="container p-5">
-            <div className="text-center mb-4">
-                <PostCarrusel/>
-                <form onSubmit={handleSearchSubmit} className="d-flex justify-content-center align-items-center">
-                    <button type="submit" className="btn btn-outline-secondary">
-                        <i className="bi bi-search"></i>
-                    </button>
-                    <input 
-                        type="text" 
-                        className="form-control me-2" 
-                        style={{ maxWidth: '300px' }} 
-                        placeholder="Buscar por título o contenido" 
-                        value={searchTerm} 
-                        onChange={handleSearchChange} 
-                    />
-                    <select 
-                        className="form-select me-2" 
-                        style={{ maxWidth: '200px' }}
-                        value={selectedUser}
-                        onChange={handleUserChange}
-                    >
-                        <option value="">Todos los usuarios</option>
-                        {users.map(user => (
-                            <option key={user.id} value={user.id.toString()}>{user.name}</option>
-                        ))}
-                    </select>
-                </form>
-            </div>
+        <div className="container-fluid p-0">
+            <PostCarousel
+                searchTerm={searchTerm}
+                onSearchChange={handleSearchChange}
+                onSearchSubmit={handleSearchSubmit}
+            />
 
-            <div className="d-flex justify-content-center mb-4">
-                <Pagination
-                    currentPage={currentPage}
-                    totalPages={totalPages}
-                    onPageChange={handlePageChange}
+            <h3 className='mt-3 text-center'>Filtrar Usuario</h3>
+            <div className="container pb-3">
+                <UserFilter
+                    users={users}
+                    selectedUser={selectedUser}
+                    userPage={userPage}
+                    usersPerPage={usersPerPage}
+                    handleUserChange={handleUserChange}
+                    handleUserPageChange={handleUserPageChange}
                 />
-            </div>
 
-            <div className="row row-cols-2 row-cols-sm-3 row-cols-md-4 g-4">
-                {paginatedPosts.map(post => {
-                    const photo = getPhotoForPost(post.id);
-                    const highlightedTitle = highlightText(post.title, highlightedTerm);
-                    const highlightedBody = highlightText(post.body, highlightedTerm);
-                    return (
-                        <div className="col" key={post.id}>
-                            <div className="card shadow-sm" onClick={() => handleCardClick(post.id)}>
-                                {photo && <img src={photo.url} className="card-img-top" alt={photo.title} />}
-                                <div className="card-body">
-                                    <h5 className="card-title" dangerouslySetInnerHTML={{ __html: highlightedTitle }} />
-                                    <p className="card-text" dangerouslySetInnerHTML={{ __html: highlightedBody }} />
+                <div className="d-flex justify-content-center mb-4">
+                    <Pagination
+                        currentPage={currentPage}
+                        totalPages={totalPages}
+                        onPageChange={handlePageChange}
+                    />
+                </div>
+
+                <div className="row row-cols-2 row-cols-sm-3 row-cols-md-4 g-4">
+                    {paginatedPosts.map(post => {
+                        const photo = getPhotoForPost(post.id);
+                        const highlightedTitle = highlightText(post.title, highlightedTerm);
+                        const highlightedBody = highlightText(post.body, highlightedTerm);
+                        const commentCount = getCommentCountForPost(post.id);
+
+                        return (
+                            <div className="col" key={post.id}>
+                                <div className="card shadow-sm" onClick={() => handleCardClick(post.id)}>
+                                    {photo && <img src={photo.url} className="card-img-top" alt={photo.title} />}
+                                    <div className="card-body">
+                                        <h5 className="card-title" dangerouslySetInnerHTML={{ __html: highlightedTitle }} />
+                                        <p className="card-text" dangerouslySetInnerHTML={{ __html: highlightedBody }} />
+                                    </div>
+                                    {commentCount > 0 && (
+                                        <div className="comment-count">
+                                            {commentCount} Comentario {commentCount > 1 ? 's' : ''}
+                                        </div>
+                                    )}
                                 </div>
                             </div>
-                        </div>
-                    );
-                })}
+                        );
+                    })}
+                </div>
             </div>
         </div>
     );

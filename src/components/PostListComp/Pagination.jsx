@@ -7,6 +7,7 @@ const Pagination = ({ currentPage, totalPages, onPageChange }) => {
         }
     };
 
+    //siguiente
     const handleNext = () => {
         if (currentPage < totalPages) {
             onPageChange(currentPage + 1);
@@ -20,15 +21,15 @@ const Pagination = ({ currentPage, totalPages, onPageChange }) => {
                 onClick={handlePrevious}
                 disabled={currentPage === 1}
             >
-                Previous
+                Anterior
             </button>
-            <span className="mx-3">Página número {currentPage} de {totalPages}</span>
+            <span className="mx-3">Página {currentPage} / {totalPages}</span>
             <button 
                 className="btn btn-primary ms-2"
                 onClick={handleNext}
                 disabled={currentPage === totalPages}
             >
-                Next
+                Siguiente
             </button>
         </div>
     );

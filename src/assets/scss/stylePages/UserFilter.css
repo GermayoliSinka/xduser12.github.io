@@ -1,0 +1,80 @@
+.user-filter-wrapper {
+    padding: 20px 0;
+    margin-bottom: 20px;
+}
+
+.user-filter-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    position: relative;
+    padding: 15px 40px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.user-badges-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow-x: hidden;
+    white-space: nowrap;
+}
+
+.user-badge {
+    display: inline-flex;
+    align-items: center;
+    padding: 5px 10px;
+    margin: 0 5px;
+    border-radius: 20px;
+    background-color: #f0f0f0;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.user-badge:hover {
+    background-color: #e0e0e0;
+}
+
+.user-badge.selected {
+    background-color: #0b2d51;
+    color: white;
+}
+
+.user-avatar {
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    margin-right: 8px;
+}
+
+.nav-button {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    font-size: 24px;
+    color: #06213e;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.nav-button:hover {
+    color: #092848;
+}
+
+.nav-button.disabled {
+    color: #ccc;
+    cursor: not-allowed;
+}
+
+.nav-button:first-child {
+    left: 10px;
+}
+
+.nav-button:last-child {
+    right: 10px;
+}

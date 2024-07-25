@@ -1,39 +1,67 @@
-.custom-navbar {
-    background-color: #001f3f; /* Azul marino */
-    padding: 1rem 2rem;
+.navbar {
+    background-color: white;
+    padding: 15px 0;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
 }
 
-.custom-brand {
-    font-size: 2rem;
+.navbar-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+.navbar-brand {
+    text-decoration: none;
+}
+
+.brand-text {
+    font-size: 1.5rem;
     font-weight: bold;
-    text-transform: uppercase; /* Convertir a mayúsculas */
-    margin-left: 2rem; /* Espacio adicional a la izquierda */
+    color: black;
 }
 
-.custom-brand span {
-    display: inline-block;
-    transition: transform 0.3s ease;
+.navbar-center {
+    flex-grow: 1;
+    display: flex;
+    justify-content: center;
 }
 
-.custom-brand span:hover {
-    transform: scale(1.2);
+.navbar-menu {
+    list-style-type: none;
+    display: flex;
+    margin: 0;
+    padding: 0;
 }
 
-.letter { color: hsl(0, 100%, 71%); font-size: 1.5rem; }
+.nav-item {
+    margin: 0 15px;
+}
+
+.nav-link {
+    text-decoration: none;
+    color: black;
+    font-weight: 500;
+    transition: color 0.3s ease;
+}
+
+.nav-link:hover {
+    color: #555;
+}
 
 .social-icons {
-    margin-left: auto;
-    margin-right: 2px; 
-    margin-top: 5px;
+    display: flex;
 }
 
 .social-icons a {
-    color: white;
-    font-size: 1.5rem;
-    margin: 0 0.75rem; 
+    color: black;
+    font-size: 1.2rem;
+    margin-left: 15px;
     transition: color 0.3s ease;
 }
 
 .social-icons a:hover {
-    color: #feca57;
+    color: #555;
 }
