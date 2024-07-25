@@ -1,4 +1,3 @@
-import patito from '../../assets/images/patito.png';
 
 export default function HomePage() {
   return (
@@ -8,7 +7,7 @@ export default function HomePage() {
           <h1>
             Test <i className="bi bi-car-front-fill"></i>
           </h1>
-          <img src={patito} alt="patito" width={'400px'} />
+
           <div className="dropdown my-3">
             <button
               className="btn btn-primary dropdown-toggle"
