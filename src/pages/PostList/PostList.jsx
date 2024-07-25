@@ -5,6 +5,8 @@ import Pagination from './../../components/PostListComp/Pagination';
 import './../../assets/scss/stylePages/PostList.css';
 import UserFilter from './../../components/PostListComp/UserFilter';
 import PostCarousel from '../../components/PostListComp/PostCarrusel';
+import Modal from 'react-bootstrap/Modal';
+import Button from 'react-bootstrap/Button';
 
 const PostList = ({ postsPerPage }) => {
     const [posts, setPosts] = useState([]);
@@ -16,7 +18,8 @@ const PostList = ({ postsPerPage }) => {
     const [selectedUser, setSelectedUser] = useState('');
     const [highlightedTerm, setHighlightedTerm] = useState('');
     const [userPage, setUserPage] = useState(1);
-    const usersPerPage = 5; 
+    const [showNoResultsModal, setShowNoResultsModal] = useState(false);
+    const usersPerPage = 5;
     const navigate = useNavigate();
 
     useEffect(() => {
@@ -40,7 +43,7 @@ const PostList = ({ postsPerPage }) => {
                 setComments(commentsData);
             } catch (error) {
                 console.log(error);
-            } 
+            }
         };
 
         fetchData();
@@ -83,6 +86,7 @@ const PostList = ({ postsPerPage }) => {
 
     const handleSearchChange = (event) => {
         setSearchTerm(event.target.value);
+        setShowNoResultsModal(false);
     };
 
     const handleUserChange = (userId) => {
@@ -93,15 +97,18 @@ const PostList = ({ postsPerPage }) => {
     const handleSearchSubmit = (event) => {
         event.preventDefault();
         setHighlightedTerm(searchTerm);
-        setSearchTerm('');
+        setSearchTerm(''); // Borra el término de búsqueda después de presionar Enter
         setCurrentPage(1);
+
+        if (filteredPosts.length === 0) {
+            setShowNoResultsModal(true);
+        }
     };
 
     const handleCardClick = (postId) => {
         navigate(`/post/${postId}`);
     };
 
-    /*filtrado user */
     const handleUserPageChange = (direction) => {
         if (direction === 'prev' && userPage > 1) {
             setUserPage(userPage - 1);
@@ -109,6 +116,8 @@ const PostList = ({ postsPerPage }) => {
             setUserPage(userPage + 1);
         }
     };
+
+    const handleCloseModal = () => setShowNoResultsModal(false);
 
     return (
         <div className="container-fluid p-0">
@@ -154,7 +163,7 @@ const PostList = ({ postsPerPage }) => {
                                     </div>
                                     {commentCount > 0 && (
                                         <div className="comment-count">
-                                            {commentCount} Comentario {commentCount > 1 ? 's' : ''}
+                                            {commentCount} Comentario{commentCount > 1 ? 's' : ''}
                                         </div>
                                     )}
                                 </div>
@@ -163,6 +172,18 @@ const PostList = ({ postsPerPage }) => {
                     })}
                 </div>
             </div>
+
+            <Modal show={showNoResultsModal} onHide={handleCloseModal}>
+                <Modal.Header closeButton>
+                    <Modal.Title>No se encontraron resultados</Modal.Title>
+                </Modal.Header>
+                <Modal.Body>No hay publicaciones que coincidan con su búsqueda.</Modal.Body>
+                <Modal.Footer>
+                    <Button variant="secondary" onClick={handleCloseModal}>
+                        Cerrar
+                    </Button>
+                </Modal.Footer>
+            </Modal>
         </div>
     );
 };
