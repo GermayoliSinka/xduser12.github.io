@@ -4,9 +4,10 @@ import { useNavigate } from 'react-router-dom';
 import Pagination from './../../components/PostListComp/Pagination';
 import './../../assets/scss/stylePages/PostList.css';
 import UserFilter from './../../components/PostListComp/UserFilter';
-import PostCarousel from '../../components/PostListComp/PostCarrusel';
+
 import Modal from 'react-bootstrap/Modal';
 import Button from 'react-bootstrap/Button';
+import PostCarrusel from '../../components/PostListComp/PostCarrusel';
 
 const PostList = ({ postsPerPage }) => {
     const [posts, setPosts] = useState([]);
@@ -121,7 +122,7 @@ const PostList = ({ postsPerPage }) => {
 
     return (
         <div className="container-fluid p-0">
-            <PostCarousel
+            <PostCarrusel
                 searchTerm={searchTerm}
                 onSearchChange={handleSearchChange}
                 onSearchSubmit={handleSearchSubmit}
